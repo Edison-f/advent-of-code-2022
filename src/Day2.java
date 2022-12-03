@@ -6,9 +6,9 @@ public class Day2 {
     public static void main(String[] args) throws FileNotFoundException {
         int score = 0;
         /**
-         * A / X- Rock
-         * B / Y - Paper
-         * C / Z - Scissors
+         * A / X- Rock / Lose
+         * B / Y - Paper / Draw
+         * C / Z - Scissors / Win
          */
         FileInputStream fs = new FileInputStream("./src/day2.txt");
         Scanner in = new Scanner(fs);
@@ -21,9 +21,9 @@ public class Day2 {
             switch (opponent) {
                 case 'A':
                     switch (mine) {
-                        case 'X' -> score += 4;
-                        case 'Y' -> score += 8;
-                        case 'Z' -> score += 3;
+                        case 'X' -> score += 3;
+                        case 'Y' -> score += 4;
+                        case 'Z' -> score += 8;
                     }
                     break;
                 case 'B':
@@ -35,9 +35,9 @@ public class Day2 {
                     break;
                 case 'C':
                     switch (mine) {
-                        case 'X' -> score += 7;
-                        case 'Y' -> score += 2;
-                        case 'Z' -> score += 6;
+                        case 'X' -> score += 2;
+                        case 'Y' -> score += 6;
+                        case 'Z' -> score += 7;
                     }
                     break;
             }
