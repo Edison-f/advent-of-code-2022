@@ -11,15 +11,20 @@ public class Day4 {
             String[] split = in.nextLine().split(",");
             String[] first = split[0].split("-");
             String[] second = split[1].split("-");
-            int[] firstInts = new int[] {Integer.parseInt(first[0]), Integer.parseInt(second[0])};
-            int[] secondInts = new int[] {Integer.parseInt(first[1]), Integer.parseInt(second[1])};
-            int firstCompare = firstInts[0] - firstInts[1];
-            int secondCompare = secondInts[0] - secondInts[1];
-            System.out.println(firstCompare + " " + secondCompare);
-            if(firstCompare >= 0 && secondCompare <= 0) {
+            int[] firstInts = new int[] {Integer.parseInt(first[0]), Integer.parseInt(first[1])};
+            int[] secondInts = new int[] {Integer.parseInt(second[0]), Integer.parseInt(second[1])};
+            if(firstInts[0] <= secondInts[0] && firstInts[1] >= secondInts[1]) {
+                System.out.println(firstInts[0] + " " + secondInts[0] + " " + (secondInts[1] - secondInts[0] + 1));
                 result++;
-            } else if(firstCompare <= 0 && secondCompare >= 0 ) {
+            } else if(firstInts[0] >= secondInts[0] && firstInts[1] <= secondInts[1]) {
+                System.out.println(firstInts[0] + " " + secondInts[0] + " " + (firstInts[1] - firstInts[0] + 1));
                 result++;
+            } else if(firstInts[0] >= secondInts[0] && firstInts[1] >= secondInts[0] && firstInts[0] <= secondInts[1] && firstInts[1] >= secondInts[1]) {
+                result++;
+                System.out.println(firstInts[1] + " " + secondInts[0] + " " + (firstInts[1] - secondInts[0] + 1));
+            } else if(firstInts[0] <= secondInts[0] && firstInts[1] <= secondInts[1] && firstInts[1] >= secondInts[0] && firstInts[0] <= secondInts[1]) {
+                result++;
+                System.out.println(firstInts[0] + " " + secondInts[1] + " ");
             }
         }
         System.out.println(result);
