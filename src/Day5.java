@@ -27,6 +27,7 @@ public class Day5 {
         in.nextLine();
         in.nextLine();
         while (in.hasNext()) {
+            /*
             for (ArrayList<Character> characterArr :
                     arr) {
                 if (characterArr.size() != 0) {
@@ -35,14 +36,15 @@ public class Day5 {
                     System.out.print(" ");
                 }
             }
+            */
             String input = in.nextLine();
             String[] split = input.split(" ");
             int n = Integer.parseInt(split[1]);
-            for (int i = 0; i < n; i++) {
+            for (int i = n; i >= 1; i--) {
                 int to = Integer.parseInt(split[5]);
                 int from = Integer.parseInt(split[3]);
                 arr.get(to - 1).
-                        add(0, arr.get(from - 1).remove(0));
+                        add(0, arr.get(from - 1).remove(i - 1));
             }
         }
 
