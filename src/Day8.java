@@ -26,17 +26,16 @@ public class Day8 {
         for (int i = 1; i < input.size() - 1; i++) {
             for (int j = 1; j < input.get(i).length() - 1; j++) {
                 int curr = grid.get(i)[j];
-                if(visibleUp(grid, i, j) ||
-                    visibleDown(grid, i, j) ||
-                    visibleLeft(grid, i, j) ||
-                    visibleRight(grid, i ,j)) {
-                    System.out.println(curr + " i: " + i + "\t j:" + j);
-                    result++;
+                int accum = visibleUp(grid, i, j) * visibleDown(grid, i, j)
+                        * visibleLeft(grid, i, j) * visibleRight(grid, i, j);
+                if(result < accum) {
+                    result = accum;
+                    System.out.println(i + " " + j + " " + accum);
                 }
             }
         }
 
-        System.out.println(result + (grid.size() * 2) + (grid.get(0).length * 2) - 4);
+        System.out.println(result);
         /*
         for (int[] arr :
                 grid) {
@@ -49,47 +48,59 @@ public class Day8 {
          */
     }
 
-    public static boolean visibleUp(ArrayList<int[]> grid, int i, int j) {
+    public static int visibleUp(ArrayList<int[]> grid, int i, int j) {
         int curr = grid.get(i)[j];
-        for (int k = i - 1; k >= 0; k--) {
-            if(grid.get(k)[j] >= curr) {
+        int result = 1;
+        for (int k = i - 1; k > 0; k--) {
+            if(grid.get(k)[j] < curr) {
 //                System.out.println(curr + " i: " + i + "\t j:" + j + "\t target:" + grid.get(i)[k]);
-                return false;
+                result++;
+            } else {
+                break;
             }
         }
-        return true;
+        return result;
     }
 
-    public static boolean visibleDown(ArrayList<int[]> grid, int i, int j) {
+    public static int visibleDown(ArrayList<int[]> grid, int i, int j) {
         int curr = grid.get(i)[j];
-        for (int k = i + 1; k < grid.size(); k++) {
-            if(grid.get(k)[j] >= curr) {
+        int result = 1;
+        for (int k = i + 1; k < grid.size() - 1; k++) {
+            if(grid.get(k)[j] < curr) {
 //                System.out.println(curr + " i: " + i + "\t j:" + j + "\t target:" + grid.get(i)[k]);
-                return false;
+                result++;
+            } else {
+                break;
             }
         }
-        return true;
+        return result;
     }
 
-    public static boolean visibleLeft(ArrayList<int[]> grid, int i, int j) {
+    public static int visibleLeft(ArrayList<int[]> grid, int i, int j) {
         int curr = grid.get(i)[j];
-        for (int k = j - 1; k >= 0; k--) {
-            if(grid.get(i)[k] >= curr) {
+        int result = 1;
+        for (int k = j - 1; k > 0; k--) {
+            if(grid.get(i)[k] < curr) {
 //                System.out.println(curr + " i: " + i + "\t j:" + j + "\t target:" + grid.get(i)[k]);
-                return false;
+                result++;
+            } else {
+                break;
             }
         }
-        return true;
+        return result;
     }
 
-    public static boolean visibleRight(ArrayList<int[]> grid, int i, int j) {
+    public static int visibleRight(ArrayList<int[]> grid, int i, int j) {
         int curr = grid.get(i)[j];
-        for (int k = j + 1; k < grid.size(); k++) {
-            if(grid.get(i)[k] >= curr) {
+        int result = 1;
+        for (int k = j + 1; k < grid.size() - 1; k++) {
+            if(grid.get(i)[k] < curr) {
 //                System.out.println(curr + " i: " + i + "\t j:" + j + "\t target:" + grid.get(i)[k]);
-                return false;
+                result++;
+            } else {
+                break;
             }
         }
-        return true;
+        return result;
     }
 }
