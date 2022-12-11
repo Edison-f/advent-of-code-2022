@@ -29,23 +29,23 @@ public class Day10 {
 
 
         }
-
+        int position = 0;
         for (int i :
                 queue) {
-            if((cycle - 20) % 40 == 0) {
-                System.out.println(x + " cycle: " + cycle);
-                signalStrengths.add(x * cycle);
+            if(position >= x - 1 && position <= x + 1) {
+                System.out.print("#");
+            } else {
+                System.out.print(".");
             }
             x += i;
-            System.out.print(x + " ");
+            position++;
+            if(position == 40) {
+                System.out.println();
+                position = 0;
+            }
 
-            cycle++;
         }
 
-        for (int i :
-                signalStrengths) {
-            sum += i;
-        }
-        System.out.println(sum);
+
     }
 }
