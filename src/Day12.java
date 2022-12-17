@@ -21,14 +21,16 @@ public class Day12 {
         }
 
         start = new int[2];
+        ArrayList<int[]> starts = new ArrayList<>();
         end = new int[2];
 
         processed = new int[rawInput.size()][rawInput.get(0).length()]; // Y, X
         for (int i = 0; i < rawInput.size(); i++) {
             for (int j = 0; j < rawInput.get(i).length(); j++) {
                 char charAt = rawInput.get(i).charAt(j);
-                if(charAt == 'S') {
+                if(charAt == 'S' || charAt == 'a') {
                     start = new int[] {i, j};
+                    starts.add(start);
                     processed[i][j] = 'a';
                 } else if (charAt == 'E') {
                     end = new int[] {i, j};
@@ -48,12 +50,18 @@ public class Day12 {
         visited[start[0]][start[1]] = 0;
 
 //        int result = recursivePathfinder(start[0], start[1], visited, 0); //, new ArrayList<>());
-        int result = queuePathfinder(start[1], start[0]);
+        int result = Integer.MAX_VALUE;
+        for (int[] startPos :
+                starts) {
+            int len = queuePathfinder(startPos[1], startPos[0]);
+            if(len > -1) {
+                result = Math.min(result, len);
+            }
+        }
         System.out.println(result);
     }
 
-    public static int recursivePathfinder(int y, int x, int[][] visited, int count) {//, ArrayList<String> trace) {
-//        if(count == 1) {
+    public static int recursivePathfinder(int y, int x, int[][] visited, int count) {
         System.out.println(y + " " + x + " " + count);
 //        }
         int result = Integer.MAX_VALUE;
@@ -141,6 +149,7 @@ public class Day12 {
             }
         }
 
+        /*
         for (int[] arr :
                 visited) {
             for (int i :
@@ -153,6 +162,7 @@ public class Day12 {
             }
             System.out.println();
         }
+        */
 
         return result;
     }
